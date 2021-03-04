@@ -15,13 +15,20 @@ const ShoppingList = (props) => {
     ],
   });
   const { items } = state;
+  console.log('ITEMS', items);
 
-  // const name = () => {
-  //   prompt('Enter Item22');
-  //   if (name) {
-  //     setState((prev) => ({ items: [...state.items, { id: uuidv4(), name }] }));
-  //   }
-  // };
+  const parsedItems =
+    items &&
+    items.map(({ id, name }) => (
+      <CSSTransition key={id} timeout={500} classNames='fade'>
+        <ListGroupItem>
+          <Button className='remove-btn' color='danger' size='sm'>
+            &times;
+          </Button>
+          {name}
+        </ListGroupItem>
+      </CSSTransition>
+    ));
 
   return (
     <div>
@@ -37,6 +44,9 @@ const ShoppingList = (props) => {
       >
         Add Item
       </Button>
+      <ListGroup>
+        <TransitionGroup className='shopping-list'>{parsedItems}</TransitionGroup>
+      </ListGroup>
     </div>
   );
 };
