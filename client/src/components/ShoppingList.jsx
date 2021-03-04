@@ -15,20 +15,29 @@ const ShoppingList = (props) => {
     ],
   });
   const { items } = state;
-  console.log('ITEMS', items);
 
   const parsedItems =
     items &&
     items.map(({ id, name }) => (
       <CSSTransition key={id} timeout={500} classNames='fade'>
         <ListGroupItem>
-          <Button className='remove-btn' color='danger' size='sm'>
+          <Button
+            className='remove-btn'
+            color='danger'
+            size='sm'
+            onClick={() =>
+              setState((prev) => ({
+                items: state.items.filter((item) => item.id !== id),
+              }))
+            }
+          >
             &times;
           </Button>
           {name}
         </ListGroupItem>
       </CSSTransition>
     ));
+  const deleteItem = () => {};
 
   return (
     <div>
