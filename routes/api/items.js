@@ -10,6 +10,7 @@ const Item = require('../../models/Item');
 // @access  Public
 
 router.get('/', (req, res) => {
+  console.log("HIT ROUTE!!!!!!!!!!")
   Item.find()
     .sort({ date: -1 })
     .then(items => res.json(items))

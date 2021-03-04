@@ -12,15 +12,10 @@ const app = new express();
 //Body Parser MiddleWare
 app.use(bodyParser.json());
 
-// const mongoURI = process.env.MONGOURI;
+const mongoURI = process.env.MONGOURI;
 const mongoAddr = process.env.MONGO_ADDR;
 const mongoDBName = process.env.MONGO_DB;
-// mongoose.connect(mongoURI)
-//   .then(() => { console.log("Connected to MongoDB...") })
-//   .catch((e) => console.log(e));
-
-
-mongoose.connect(`mongodb://${mongoAddr}/${mongoDBName}`, {
+mongoose.connect(mongoURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false,
@@ -28,6 +23,16 @@ mongoose.connect(`mongodb://${mongoAddr}/${mongoDBName}`, {
 })
   .then(() => { console.log("Connected to MongoDB...") })
   .catch((e) => console.log(e));
+
+
+// mongoose.connect(`mongodb://${mongoAddr}/${mongoDBName}`, {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+//   useFindAndModify: false,
+//   useCreateIndex: true
+// })
+//   .then(() => { console.log("Connected to MongoDB...") })
+//   .catch((e) => console.log(e));
 
 
 //Use Routes
