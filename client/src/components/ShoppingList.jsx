@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
-
+import React, { useState, useEffect } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import { ListGroup, ListGroupItem, Button } from 'reactstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
-import { v4 as uuidv4 } from 'uuid';
+import { connect } from 'react-redux';
+import { getItems } from '../actions/itemActions';
+import PropTypes from 'prop-types';
 
 const ShoppingList = (props) => {
-  const [state, setState] = useState({
-    items: [
-      { id: uuidv4(), name: 'Eggs' },
-      { id: uuidv4(), name: 'Steak' },
-      { id: uuidv4(), name: 'Milk' },
-      { id: uuidv4(), name: 'Water' },
-    ],
-  });
-  const { items } = state;
+  const [itemState, setState] = useState({});
+
+  // useEffect(() => {
+  //   setState(props.getItems());
+  // }, []);
+
+  const { items } = props.item;
 
   const parsedItems =
     items &&
@@ -27,7 +27,7 @@ const ShoppingList = (props) => {
             size='sm'
             onClick={() =>
               setState((prev) => ({
-                items: state.items.filter((item) => item.id !== id),
+                items: itemState.items.filter((item) => item.id !== id),
               }))
             }
           >
@@ -37,6 +37,7 @@ const ShoppingList = (props) => {
         </ListGroupItem>
       </CSSTransition>
     ));
+
   const deleteItem = () => {};
 
   return (
@@ -47,7 +48,7 @@ const ShoppingList = (props) => {
         onClick={() => {
           const name = prompt('Enter Item');
           if (name) {
-            setState((prev) => ({ items: [...state.items, { id: uuidv4(), name }] }));
+            setState((prev) => ({ items: [...itemState.items, { id: uuidv4(), name }] }));
           }
         }}
       >
@@ -60,4 +61,12 @@ const ShoppingList = (props) => {
   );
 };
 
-export default ShoppingList;
+ShoppingList.propTypes = {
+  getItems: PropTypes.func.isRequired,
+  item: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  item: state.item,
+});
+export default connect(mapStateToProps, { getItems })(ShoppingList);
