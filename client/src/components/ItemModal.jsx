@@ -3,6 +3,8 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, La
 import { connect } from 'react-redux';
 import { addItem } from '../actions/itemActions';
 
+import { v4 as uuidv4 } from 'uuid';
+
 const ItemModal = (props) => {
   const [form, setForm] = useState();
   const [modal, setModal] = useState(false);
@@ -12,7 +14,18 @@ const ItemModal = (props) => {
   const handleChange = (e) => {
     setForm({ [e.target.name]: e.target.value });
   };
-  const handleSubmit = () => {};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const newItem = {
+      id: uuidv4(),
+      name: form.name,
+    };
+
+    //Redux AddItem Action
+    props.addItem(newItem);
+    toggle();
+  };
 
   //style={{marginBottom='2rem'}}
   return (
@@ -41,4 +54,8 @@ const ItemModal = (props) => {
   );
 };
 
-export default connect()(ItemModal);
+const mapStateToProps = (state) => ({
+  item: state.item,
+});
+
+export default connect(mapStateToProps, { addItem })(ItemModal);

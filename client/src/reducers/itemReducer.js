@@ -10,7 +10,7 @@ const initialState = {
   ]
 }
 
-export default function(state = initialState, action) {
+const itemReducer = function(state = initialState, action) {
   switch (action.type) {
     case GET_ITEMS:
       return { ...state };
@@ -19,7 +19,15 @@ export default function(state = initialState, action) {
         ...state,
         items: state.items.filter(item => item.id !== action.payload)
       }
+    case ADD_ITEM:
+      console.log("ACTION", action)
+      return {
+        ...state,
+        items: [action.payload, ...state.items]
+      }
     default:
       return state;
   }
 }
+
+export default itemReducer
