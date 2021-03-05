@@ -7,10 +7,10 @@ import { getItems, deleteItem } from '../actions/itemActions';
 import PropTypes from 'prop-types';
 
 const ShoppingList = (props) => {
-  const [itemState, setState] = useState(props.item);
+  // const [itemState, setState] = useState(props.item);
 
   useEffect(() => {
-    setState(props.getItems());
+    props.getItems();
   }, []);
 
   const { items } = props.item;
@@ -18,7 +18,7 @@ const ShoppingList = (props) => {
   const onDelete = (id) => {
     props.deleteItem(id);
   };
-
+  // console.log('STATWE', itemState);
   const parsedItems =
     items &&
     items.map(({ id, name }) => (
