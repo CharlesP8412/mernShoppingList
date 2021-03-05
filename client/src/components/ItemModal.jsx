@@ -3,8 +3,6 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, La
 import { connect } from 'react-redux';
 import { addItem } from '../actions/itemActions';
 
-import { v4 as uuidv4 } from 'uuid';
-
 const ItemModal = (props) => {
   const [form, setForm] = useState();
   const [modal, setModal] = useState(false);
@@ -18,7 +16,6 @@ const ItemModal = (props) => {
     e.preventDefault();
 
     const newItem = {
-      id: uuidv4(),
       name: form.name,
     };
 
