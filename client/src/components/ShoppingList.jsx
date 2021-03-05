@@ -7,11 +7,11 @@ import { getItems, deleteItem } from '../actions/itemActions';
 import PropTypes from 'prop-types';
 
 const ShoppingList = (props) => {
-  const [itemState, setState] = useState({});
+  const [itemState, setState] = useState(props.item);
 
-  // useEffect(() => {
-  //   setState(props.getItems());
-  // }, []);
+  useEffect(() => {
+    setState(props.getItems());
+  }, []);
 
   const { items } = props.item;
 
