@@ -21,10 +21,10 @@ const ShoppingList = (props) => {
   // console.log('STATWE', itemState);
   const parsedItems =
     items &&
-    items.map(({ id, name }) => (
-      <CSSTransition key={id} timeout={500} classNames='fade'>
+    items.map(({ _id, name }) => (
+      <CSSTransition key={_id} timeout={500} classNames='fade'>
         <ListGroupItem>
-          <Button className='remove-btn' color='danger' size='sm' onClick={onDelete.bind(this, id)}>
+          <Button className='remove-btn' color='danger' size='sm' onClick={onDelete.bind(this, _id)}>
             &times;
           </Button>
           {name}
