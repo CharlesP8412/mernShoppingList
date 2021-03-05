@@ -19,15 +19,13 @@ const ItemModal = (props) => {
       name: form.name,
     };
 
-    //Redux AddItem Action
     props.addItem(newItem);
     toggle();
   };
 
-  //style={{marginBottom='2rem'}}
   return (
     <div>
-      <Button color='dark' onClick={toggle}>
+      <Button color='dark' style={{ margin: '1rem' }} onClick={toggle}>
         Add Item
       </Button>
 

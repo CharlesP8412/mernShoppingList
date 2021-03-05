@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { ListGroup, ListGroupItem, Button } from 'reactstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
@@ -7,18 +7,17 @@ import { getItems, deleteItem } from '../actions/itemActions';
 import PropTypes from 'prop-types';
 
 const ShoppingList = (props) => {
-  // const [itemState, setState] = useState(props.item);
-
   useEffect(() => {
     props.getItems();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const { items } = props.item;
 
   const onDelete = (id) => {
     props.deleteItem(id);
   };
-  // console.log('STATWE', itemState);
+
+  const { items } = props.item;
+
   const parsedItems =
     items &&
     items.map(({ _id, name }) => (
